@@ -967,7 +967,7 @@ local slots = (function()
 		local desc = {
 			[CHEST_SLOT] = "Chests",
 			[BLOCK_SLOT] = "Cobblestone",
-			[FUEL_SLOT] = "Fuel (only coal supported)",
+			[FUEL_SLOT] = "Fuel (coal or charcoal supported)",
 			[FUEL_CHEST_SLOT] = "Fuel Entangled Chest",
 			[CHUNK_LOADER_SLOT] = "2 Chunk Loaders",
 		}
@@ -1501,7 +1501,7 @@ local function sortInventory(sortFuel)
 	--clear fuel slot
 	if sortFuel then
 		local initFuelData = wrapt.getItemDetail(slots.get(FUEL_SLOT))
-		if initFuelData and initFuelData.name ~= "minecraft:coal" then
+		if initFuelData and initFuelData.name ~= "minecraft:coal" or "minecraft:charcoal" then
 			wrapt.select(slots.get(FUEL_SLOT))
 			wrapt.drop()
 		end
@@ -1522,7 +1522,7 @@ local function sortInventory(sortFuel)
 			if curData.name == "minecraft:cobblestone" then
 				wrapt.select(i)
 				wrapt.transferTo(slots.get(BLOCK_SLOT))
-			elseif sortFuel and curData.name == "minecraft:coal" then
+			elseif sortFuel and curData.name == "minecraft:coal" or "minecraft:charcoal" then
 				wrapt.select(i)
 				wrapt.transferTo(slots.get(FUEL_SLOT))
 			end
